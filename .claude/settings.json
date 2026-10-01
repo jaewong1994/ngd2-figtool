@@ -1,0 +1,13 @@
+{
+  "enabledPlugins": {
+    "prompts.chat@prompts.chat": true
+  },
+  "extraKnownMarketplaces": {
+    "prompts.chat": {
+      "source": {
+        "source": "github",
+        "repo": "f/prompts.chat"
+      }
+    }
+  }
+}
