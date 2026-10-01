@@ -6,11 +6,12 @@
 # 레포에 이미 커밋된 것 (별도 설치 불필요):
 #   - .claude/skills/        : agent-browser, hyperframes, impeccable, design-taste-frontend(Taste),
 #                              agent-reach, remotion-* (12개)
-#   - .claude/settings.json  : ECC, prompts.chat 플러그인/마켓플레이스 선언 (프로젝트 범위)
+#   - .claude/settings.json  : prompts.chat 플러그인/마켓플레이스 선언 (프로젝트 범위)
 #   - .mcp.json              : MarkItDown MCP 서버 (uvx markitdown-mcp)
+#   ※ 영상의 5번 ECC 는 사용자 요청으로 설치하지 않는다.
 #
 # 이 스크립트가 하는 일 (로컬 PC에서 한 번만 실행):
-#   1) .claude/settings.json 에 선언된 플러그인(ECC, prompts.chat)을 내 PC에 다운로드
+#   1) .claude/settings.json 에 선언된 플러그인(prompts.chat)을 내 PC에 다운로드
 #   2) 스킬이 호출하는 CLI 설치: agent-browser, agent-reach, graphify, markitdown
 #
 # 사용법:  bash scripts/setup-claude-plugins.sh
@@ -41,13 +42,10 @@ py_tool_install() {   # py_tool_install <표시이름> <패키지 spec>
 }
 
 # -----------------------------------------------------------------------------
-step "1) Claude Code 플러그인 — ECC, prompts.chat (프로젝트 범위)"
+step "1) Claude Code 플러그인 — prompts.chat (프로젝트 범위)"
 if have claude; then
-  claude plugin marketplace add affaan-m/ECC   --scope project >/dev/null 2>&1 || true
   claude plugin marketplace add f/prompts.chat --scope project >/dev/null 2>&1 || true
-  claude plugin install ecc@ecc                   --scope project && ok "ecc@ecc"                   || FAILED+=("ecc@ecc")
   claude plugin install prompts.chat@prompts.chat --scope project && ok "prompts.chat@prompts.chat" || FAILED+=("prompts.chat@prompts.chat")
-  echo "   (선택) ECC 훅 설정: Claude Code 안에서 /plugin configure ecc@ecc"
 else
   warn "claude CLI 가 없습니다. 설치: https://code.claude.com/docs/en/setup"
   FAILED+=("claude-plugins")

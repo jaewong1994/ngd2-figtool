@@ -1,15 +1,8 @@
 {
   "enabledPlugins": {
-    "ecc@ecc": true,
     "prompts.chat@prompts.chat": true
   },
   "extraKnownMarketplaces": {
-    "ecc": {
-      "source": {
-        "source": "github",
-        "repo": "affaan-m/ECC"
-      }
-    },
     "prompts.chat": {
       "source": {
         "source": "github",
